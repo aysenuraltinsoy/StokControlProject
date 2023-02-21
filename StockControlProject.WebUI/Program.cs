@@ -6,8 +6,8 @@ namespace StockControlProject.WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
-            builder.Services.AddControllersWithViews();
+            
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             var app = builder.Build();
 
@@ -25,6 +25,12 @@ namespace StockControlProject.WebUI
             app.UseRouting();
 
             app.UseAuthorization();
+           
+                app.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+           
 
             app.MapControllerRoute(
                 name: "default",
